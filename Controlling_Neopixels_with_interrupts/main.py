@@ -15,6 +15,7 @@ button = machine.Pin(0,machine.Pin.IN,machine.Pin.PULL_UP)
 #variable
 value = 0
 
+#interrupt service routine
 def toggle_led(p):
     global value
     if value == 0:
