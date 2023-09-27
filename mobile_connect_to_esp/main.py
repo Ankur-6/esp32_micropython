@@ -10,11 +10,11 @@ try:
     wlan.active(False)
     time.sleep(1)
     wlan.active(True)
-    wlan.config(essid ="triesp", password="priyam@123", authmode=network.AUTH_WPA_WPA2_PSK)
+    wlan.config(essid ="triesp", password="ankur@123", authmode=network.AUTH_WPA_WPA2_PSK)
     #scan nearby networks
     networks = wlan.scan()
     #print the available networks
-  #  print(networks)
+    #print(networks)
 except Exception as e:
     print(f"error > {e}")
     
