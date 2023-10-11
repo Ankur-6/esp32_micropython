@@ -15,7 +15,7 @@ import sys
 import gc
 import dht
 import urequests
-import random
+#import random
 
 # run garbage collector
 # it is a form of automatic memory management
@@ -29,16 +29,16 @@ led = machine.Pin(2,machine.Pin.OUT)
 # default status of led is OFF
 led.off()
 # DHT 11 sensor object
-#DHT is Digital Humidity and Temperature sensor
-#DHT sensor is used to check temperature and humidity around the sensor
-#d = dht.DHT11(machine.Pin(15))
-# # DHT 22 Sensor
-# d = dht.DHT22(machine.Pin(15))
+# DHT is Digital Humidity and Temperature sensor
+# DHT sensor is used to check temperature and humidity around the sensor
+d = dht.DHT11(machine.Pin(15))
+# DHT 22 Sensor
+#d = dht.DHT22(machine.Pin(15))
 
 # constants and variables
 HTTP_HEADERS = {'Content-Type' : 'application/json'}
 THINGSPEAK_WRITE_API_KEY = 'MLGISYI575N0TQLB'
-UPDATE_TIME_INTERVAL = 5000 # ms
+UPDATE_TIME_INTERVAL = 10000 # ms
 last_update = time.ticks_ms()
 
 # connect ESP32 with existing WiFi network
@@ -70,11 +70,11 @@ while True:
     # wait for the update sensor data using non-blocking delay
     if time.ticks_ms()-last_update > UPDATE_TIME_INTERVAL:
         # measure sensor data
-        #d.measure()
-        #t = d.temperature()
-        #h = d.humidity()
-        t = random.randint(1,50)
-        h = random.randint(51,100)
+        d.measure()
+        t = d.temperature()
+        h = d.humidity()
+        #t = random.randint(1,50)
+        #h = random.randint(51,100)
         #json is in dictionary format
         # put data into json format
         dht_readings = {'field1':t, 'field2':h}
