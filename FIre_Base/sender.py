@@ -63,7 +63,7 @@ def connect_wifi(ssid,psk,timeout):
         print("\nCould not connect, try again")
         sys.exit()
         
-connect_wifi("Fuck Society 4G","Lawd@Lel3",10)
+connect_wifi("Boss","123456789",10)
 
 
 
@@ -80,16 +80,29 @@ def update_firebase(value):
     response = urequests.put(auth_url, data=ujson.dumps(data), headers=headers)
     response.close()
     
+# Helper function to read the button state from Firebase
+def read_firebase():
+    auth_url = f"{FIREBASE_URL}{NODE_PATH}.json?auth={FIREBASE_API_KEY}"
+    response = urequests.get(auth_url)
+    data = ujson.loads(response.text)
+    response.close()
+    return data.get(NODE_PATH, -1)
+    
 while True:
     distance = measure_distance()
     print("DIstance :",distance)
     if distance <= 20:
         led.value(1)
-        print("LED is turned on")
         update_firebase(1)
+        print("Distance thresold is acquired, Turning on the LED")
+        #print("LED is turned on")
     else:
         led.value(0)
-        print("LED is turned off")
         update_firebase(0)
-    
-
+        #print("LED is turned off")
+    current_state = read_firebase()
+    if current_state == 1:
+        print("LED is turned on")
+    else:
+        print("LED is turned off")
+    time.sleep(2)

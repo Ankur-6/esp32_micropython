@@ -8,18 +8,18 @@ import time
 import urequests
 import ujson
 
+# Initialize onboard LED (Pin 2)
+led = machine.Pin(2, machine.Pin.OUT)
+
 # Connect to Wi-Fi
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
-wlan.connect("Fuck Society 4G", "Lawd@Lel3")  # Replace with your Wi-Fi SSID and password
+wlan.connect("Boss", "123456789")  # Replace with your Wi-Fi SSID and password
 
 while not wlan.isconnected():
     pass
 
 print("Wi-Fi connected")
-
-# Initialize onboard LED (Pin 2)
-led = machine.Pin(2, machine.Pin.OUT)
 
 # Firebase configuration
 FIREBASE_URL = "https://esp32-f4164-default-rtdb.firebaseio.com/"  # Replace with your Firebase URL
@@ -36,13 +36,23 @@ def read_firebase():
     response.close()
     return data.get(NODE_PATH, -1)
 
+# Helper function to update the Firebase database
+def update_firebase(value):
+    data = {NODE_PATH: value}
+    headers = {'Content-Type': 'application/json'}
+    auth_url = f"{FIREBASE_URL}{NODE_PATH}.json?auth={FIREBASE_API_KEY}"
+    response = urequests.put(auth_url, data=ujson.dumps(data), headers=headers)
+    response.close()
+
 # Main loop
 while True:
     current_state = read_firebase()
     
     if current_state == 1:
-        # Button press detected, toggle LED
         led.value(1)
-        print("Button Pressed, LED Toggled")
+        update_firebase(1)
+        print("LED is turned on")
     elif current_state == 0:
         led.value(0)
+        update_firebase(0)
+        print("LED is turned off")
