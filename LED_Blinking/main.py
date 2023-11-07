@@ -9,7 +9,7 @@ import time
 
 #led_pin = machine.Pin(8,machine.Pin.OUT)
 
-led = machine.Pin(8,machine.Pin.OUT)
+led = machine.Pin(16,machine.Pin.OUT)
 
 while True:
     try:
@@ -27,4 +27,5 @@ while True:
     except KeyboardInterrupt:
         print("Exit")
         break
+    
     

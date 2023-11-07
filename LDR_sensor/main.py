@@ -5,7 +5,7 @@ import neopixel
 import time
 
 # Define the LDR module and NeoPixel LED pins
-LDR_PIN = machine.ADC(machine.Pin(4))
+LDR_PIN = machine.ADC(machine.Pin(18))
 np = neopixel.NeoPixel(machine.Pin(48), 1)  # 1 NeoPixel LED connected to GPIO pin 13
 
 while True:
@@ -25,4 +25,4 @@ while True:
     print("LDR Value:", ldr_value)
 
     # Sleep for a short time to avoid rapid value changes
-    time.sleep(1)
+    time.sleep(1)

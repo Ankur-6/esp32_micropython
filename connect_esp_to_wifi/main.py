@@ -2,8 +2,8 @@
 import network
 import time
 import sys
-ssid = "Redmi 9 Power"
-psk = "abcd3456"
+ssid = "Ankur"
+psk = "shubh@9118"
 
 
 try:

@@ -24,9 +24,9 @@ class Flasher:
             print(f"LED at pin {self.pin} is off")
 
 #object for led 1
-led1 = Flasher(2,500,900)
+led1 = Flasher(18,500,900)
 #object for led 2
-led2 = Flasher(4,1000,1400)
+led2 = Flasher(17,1000,1400)
 
 while True:
     try:

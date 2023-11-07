@@ -6,7 +6,7 @@ import machine
 import time
 
 #create object for led pin
-led = machine.Pin(2,machine.Pin.OUT)
+led = machine.Pin(16,machine.Pin.OUT)
 
 #object for button
 button = machine.Pin(0,machine.Pin.IN,machine.Pin.PULL_UP)
